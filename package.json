@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "ag-grid-vue3": "^32.1.0",
-    "vue": "^3.4.35"
+    "axios": "^1.7.3",
+    "vue": "^3.4.35",
+    "vue-axios": "^3.5.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.2",
