@@ -41,3 +41,8 @@ The Crypto Dashboard is a web application built with Vue.js that displays real-t
 2. Install dependencies using `yarn`
 3. Run the app with `yarn dev`
 4. Open your browser and navigate to `http://localhost:5173`
+
+
+## License
+
+![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)
