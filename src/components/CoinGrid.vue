@@ -3,7 +3,9 @@ import { ref } from "vue";
 import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the Data Grid
 import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the Data Grid
 import { AgGridVue } from "ag-grid-vue3";
-import axios from "axios";
+
+import { useCoinsStore } from "../stores/useCoinsStore";
+const coinsStore = useCoinsStore();
 
 import CoinCellRenderer from "./cell-renderers/CoinCellRenderer.vue";
 const numberFormatter = (params) => {
@@ -20,9 +22,8 @@ const autoSizeStrategy = {
   type: "fitGridWidth",
 };
 
-const coins = ref([]);
 const colDefs = ref([
-  { headerName: "Coin", field: "coin", cellRenderer: CoinCellRenderer },
+  { headerName: "Coin", field: "coin", cellRenderer: CoinCellRenderer, minWidth: 250, maxWidth: 450 },
   { headerName: "Price", field: "current_price", valueFormatter: numberFormatter, cellDataType: "number", type: "rightAligned", maxWidth: 150 },
   { headerName: "ATL", field: "atl", valueFormatter: numberFormatter, cellDataType: "number", type: "rightAligned", maxWidth: 150 },
   { headerName: "ATH", field: "ath", valueFormatter: numberFormatter, cellDataType: "number", type: "rightAligned", maxWidth: 150 },
@@ -32,39 +33,40 @@ const colDefs = ref([
   { headerName: "Market Cap", field: "market_cap", valueFormatter: numberFormatter, cellDataType: "number", type: "rightAligned", maxWidth: 180 },
 ]);
 
-async function loadCoins() {
-  try {
-    const response = await axios.get(
-      "https://api.coingecko.com/api/v3/coins/markets",
-      {
-        params: {
-          vs_currency: "usd",
-          order: "market_cap_desc",
-          per_page: 20,
-          page: 1,
-          sparkline: false,
-        },
-      }
-    );
-    coins.value = response.data;
-  } catch (error) {
-    console.error("Error fetching coin data:", error);
-  }
-}
-loadCoins();
+coinsStore.loadCoins();
 
+const onSortChanged = (params) => {
+  const sortModel = params.columns.map(c => ({ colId: c.colId, sort: c.sort }))
+  if (sortModel.length > 0) {
+    const sortField = sortModel[0].colId;
+    const sortOrder = sortModel[0].sort;
+    coinsStore.updateSort(sortField, sortOrder);
+  }
+};
+
+const onPaginationChanged = (params) => {
+  if (params.newPage) {
+    const newPage = params.api.paginationGetCurrentPage() + 1; 
+    coinsStore.loadCoins(newPage);
+  }
+};
 
 </script>
 
 <template>
   <ag-grid-vue
-    :rowData="coins"
+    :rowData="coinsStore.coins"
     :columnDefs="colDefs"
-    style="height: 800px;"
+    style="height: 520px;"
     :suppressMenuHide="false"
     allowDragFromColumnsToolPanel
     :autoSizeStrategy="autoSizeStrategy"
+    :pagination="true"
+    :paginationPageSizeSelector="[10, 25, 50, 100]"
+    :paginationPageSize="10"
     class="ag-theme-quartz"
+    @paginationChanged="onPaginationChanged"
+    @sortChanged="onSortChanged"
   >
   </ag-grid-vue>
 </template>
