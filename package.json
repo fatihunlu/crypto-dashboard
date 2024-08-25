@@ -12,6 +12,7 @@
   "dependencies": {
     "ag-grid-vue3": "^32.1.0",
     "axios": "^1.7.3",
+    "pinia": "^2.2.2",
     "vue": "^3.4.35",
     "vue-axios": "^3.5.2"
   },
