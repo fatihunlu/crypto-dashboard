@@ -9,6 +9,7 @@ The Crypto Dashboard is a web application built with Vue.js that displays real-t
 * Real-Time Data: Fetches up-to-date cryptocurrency data from the CoinGecko API.
 * Custom Cell Rendering: Implements custom cell renderers for enhanced data presentation.
 * State Management: Utilizes Pinia to manage and update the state, including sorting and fetching data based on user interactions.
+* Trending Data: Displays trending coins, NFTs, and categories, giving users insights into popular market movements.
 
 ## Tech Stack
 
