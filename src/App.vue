@@ -1,13 +1,14 @@
 <script setup>
-import CoinGrid from "./components/CoinGrid.vue";
+import Navbar from "./components/Navbar.vue";
+import Footer from "./components/Footer.vue";
 </script>
 
 <template>
-  <div class="w-full h-full p-2 m-2 flex justify-center items-center">
-    <div class="w-[65%] h-[80%]">
-      <CoinGrid />
-    </div>
+  <Navbar />
+  <div id="app">
+    <router-view />
   </div>
+  <Footer />
 </template>
 
 <style scoped></style>
