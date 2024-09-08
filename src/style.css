@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#f9f9fb]
+  }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #f0f1f3 #f9f9fb;
+}

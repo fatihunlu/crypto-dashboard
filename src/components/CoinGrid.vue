@@ -71,4 +71,12 @@ const onPaginationChanged = (params) => {
   </ag-grid-vue>
 </template>
 
-<style scoped></style>
+<style scoped>
+.ag-theme-quartz {
+    position: relative;
+    z-index: 1;
+    -webkit-box-shadow: 9px 1px 15px -4px rgba(0, 0, 0, 0.1);
+    box-shadow: 9px 1px 15px -4px rgba(0, 0, 0, 0.1);
+}
+
+</style>

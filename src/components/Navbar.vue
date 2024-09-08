@@ -1,5 +1,5 @@
 <template>
-  <nav class="flex justify-between px-12 py-5 items-center bg-white">
+  <nav class="flex justify-between px-12 py-5 items-center">
     <router-link
       to="/"
     >
