@@ -43,6 +43,9 @@ The Crypto Dashboard is a web application built with Vue.js that displays real-t
 3. Run the app with `yarn dev`
 4. Open your browser and navigate to `http://localhost:5173`
 
+## Rate Limit Warning
+
+Please note that the CoinGecko API has rate limits, allowing a maximum of 50 API calls per minute. If you exceed this limit, you'll encounter a `429 Too Many Requests` error. The app includes basic state management to minimize unnecessary API calls, but during periods of high usage, you may still experience this error.
 
 ## License
 
