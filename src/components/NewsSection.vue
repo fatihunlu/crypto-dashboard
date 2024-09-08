@@ -7,8 +7,9 @@ const newsItems = ref([]);
 
 async function fetchNews() {
   try {
+    const newsUrl = `${import.meta.env.BASE_URL}news.json`;
     // https://newsdata.io/crypto-news-api
-    const response = await fetch('/news.json');
+    const response = await fetch(newsUrl);
     newsItems.value = await response.json();
   } catch (error) {
     console.error(error);
